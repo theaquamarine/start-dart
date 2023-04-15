@@ -16,5 +16,15 @@ do {
     $count++
 } while (-not(Test-Path $inv32) -and $count -lt 5)
 
-# TODO: parse & set env variables
-Get-Content $inv32
+[xml]$xml = Get-Content $inv32
+$ticket = $xml.E.A.ID #DartTicket
+$ips = $xml.E.C.T.L.N
+$ports = $xml.E.C.T.L.P
+
+for ($i = 0; $i -lt $ips.Count; $i++) {
+    'DartIP{0:D3} = {1}' -f $i, $ips[$i]
+}
+
+for ($i = 0; $i -lt $ports.Count; $i++) {
+    'DartIP{0:D3} = {1}' -f $i, $ports[$i]
+}

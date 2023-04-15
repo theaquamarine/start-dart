@@ -18,13 +18,21 @@ do {
 
 [xml]$xml = Get-Content $inv32
 $ticket = $xml.E.A.ID #DartTicket
+Write-Host "DartTicket = $ticket"
 $ips = $xml.E.C.T.L.N
+Write-Host "DartIP = $ips"
 $ports = $xml.E.C.T.L.P
+Write-Host "DartPort = $ports"
+
+try {
+    $tsenv = New-Object -COMObject Microsoft.SMS.TSEnvironment
+    $tsenv.Value('DartTicket') = $ticket
+} catch {}
 
 for ($i = 0; $i -lt $ips.Count; $i++) {
-    'DartIP{0:D3} = {1}' -f $i, $ips[$i]
+    if ($tsenv) {$tsenv.Value(('DartIP{0:D3}' -f $i)) = $ips[$i]}
 }
 
 for ($i = 0; $i -lt $ports.Count; $i++) {
-    'DartIP{0:D3} = {1}' -f $i, $ports[$i]
+    if ($tsenv) {$tsenv.Value(('DartPort{0:D3}' -f $i)) = $ports[$i]}
 }

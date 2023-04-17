@@ -11,8 +11,8 @@ $inv32 = Join-Path $PSScriptRoot 'inv32.xml'
 
 # test if inv32 exists and exit if so? check running processes?
 $count = 0
-while (-not(Test-Path $inv32) -and $count -lt 5) {
-	Start-Sleep -Seconds 5
+while (-not(Test-Path $inv32) -and $count -lt 30) {
+	Start-Sleep -Seconds 1
     $count++
 }
 

@@ -1,3 +1,12 @@
+# Start Microsoft DaRT Remote Recovery and store connection details to task sequence variables, if used in a task sequence. Useful as a boot image pre-start command, or running in a task sequence step.
+
+# Usage:
+# - Extract DaRT Toolsx64.cab from the DaRT install location to a folder
+# - Add this script and a DaRT config file (DartConfig8.dat) to the folder
+# - Set this script as a boot image's pre-start command with the folder as content
+#     powershell.exe -NoProfile -NonInteractive -WindowStyle Minimized -File Start-Dart.ps1
+# - Remote Recovery will be automatically started when the image boots
+
 $system32 = Join-Path $env:windir 'System32'
 
 if (!(Test-Path (Join-Path $system32 'DartConfig8.dat'))) {

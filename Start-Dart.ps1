@@ -4,8 +4,7 @@ if (!(Test-Path (Join-Path $system32 'DartConfig8.dat'))) {
 	Copy-Item (Join-Path $PSScriptRoot 'DartConfig8.dat') (Join-Path $system32 'DartConfig.dat')
 }
 
-. (Join-Path $PSScriptRoot 'RemoteRecovery.exe') -nomessage
-
+Start-Process (Join-Path $PSScriptRoot 'RemoteRecovery.exe') -ArgumentList '-nomessage' -WindowStyle Minimized
 
 $inv32 = Join-Path $PSScriptRoot 'inv32.xml'
 

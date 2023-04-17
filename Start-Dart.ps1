@@ -11,10 +11,10 @@ $inv32 = Join-Path $PSScriptRoot 'inv32.xml'
 
 # test if inv32 exists and exit if so? check running processes?
 $count = 0
-do {
+while (-not(Test-Path $inv32) -and $count -lt 5) {
 	Start-Sleep -Seconds 5
     $count++
-} while (-not(Test-Path $inv32) -and $count -lt 5)
+}
 
 [xml]$xml = Get-Content $inv32
 $ticket = $xml.E.A.ID #DartTicket
